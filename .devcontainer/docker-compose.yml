@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mmcv_study:
+    build: .
+    image: nvidia/cuda:12.1.0-cudnn8-devel-ubuntu20.04
+    container_name: mmcv_study
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0']
+            capabilities: [gpu]
+    volumes:
+      - type: bind
+        source: /home/tetsuya/Projects/mmcv_study/data
+        target: /workdir/data
+    stdin_open: true
+    tty: true
